@@ -2,82 +2,103 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class LoginFrame extends JFrame implements ActionListener{
+public class LoginFrame extends JFrame implements ActionListener, MouseListener {
+    public static String idnum;
 
-            JButton loginbtn;
-            JLabel leftlabel, rightlabel, toplabel;
-            JPanel left, right, bg;
-            JTextField textfield;
-            ImageIcon leftimage, rightimage, topimage;
-            
-    LoginFrame(){
+    JButton loginbtn;
+    JLabel leftlabel, rightlabel;
+    JPanel left, right, bg;
+    JTextField textfield;
+    ImageIcon leftimage, rightimage;
 
-            //login frame
-            this.setTitle("STI-CALCULATOR");
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.setSize(950, 600);
-            this.setLayout(null);
-            this.setResizable(false);
-            this.getContentPane().setBackground(Color.yellow);
-            this.setLocationRelativeTo(null);
+    LoginFrame() {
 
+        // login frame
+        this.setTitle("ASTIG-CAL");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(950, 600);
+        this.setLayout(null);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
 
-            //images
-            leftimage = new ImageIcon("image.png");
-            rightimage = new ImageIcon("main.png");
-            topimage = new ImageIcon("stilogo.png");
+        leftimage = new ImageIcon("img1.png");
+        leftlabel = new JLabel(leftimage);
+        leftlabel.setBounds(0, 0, 560, 600);
+        this.add(leftlabel);
 
-            //stilogo
-            toplabel = new JLabel(topimage);                                    //Label
-            toplabel.setBounds(9,0,85,50);
-            this.add(toplabel);
+        rightimage = new ImageIcon("img2.png");
+        rightlabel = new JLabel(rightimage);
+        rightlabel.setBounds(32, -10, 320, 320);
+        right = new JPanel();
+        right.setSize(390, 600);
+        right.setBounds(560, 0, 390, 600);
+        right.setLayout(null);
+        right.setBackground(Color.WHITE);
+        right.add(rightlabel);
+        this.add(right);
 
-            //left panel
-            leftlabel = new JLabel(leftimage);                                  //Label
-            leftlabel.setBounds(0,0,550,550);
-            left = new JPanel();                                                //Panel
-            left.setBounds(0, 50, 550, 550);
-            left.add(leftlabel);
-            left.setLayout(null);
-            this.add(left);
+        textfield = new JTextField(); // TextField
+        textfield.setBounds(60, 280, 260, 50);
+        textfield.setFont(new Font("Arial", Font.PLAIN, 14));
+        textfield.setText("Enter your ID No.");
+        textfield.addMouseListener(this);
+        textfield.addActionListener(this);
+        right.add(textfield);
 
-            //right panel
-            right = new JPanel();                                               //Panel
-            right.setBounds(566, 50, 385, 550);
-            right.setBackground(Color.white);
-            right.setLayout(null);
-            rightlabel = new JLabel(rightimage);                                //Label
-            rightlabel.setBounds(30, -30, 320, 320);
-            right.add(rightlabel);
+        loginbtn = new JButton("Login"); // Button
+        loginbtn.setBounds(60, 350, 260, 50);
+        loginbtn.setFont(new Font("Arial", Font.BOLD, 18));
+        loginbtn.setForeground(Color.WHITE);
+        loginbtn.setBackground(new Color(0, 102, 204));
+        loginbtn.setFocusable(false);
+        loginbtn.addActionListener(this);
+        right.add(loginbtn);
 
-            textfield = new JTextField();                                       //TextField
-            textfield.setBounds(60, 260, 260, 50);
-            textfield.setFont(new Font("Arial", Font.PLAIN, 14));
-            textfield.setText("Enter Your Name");
-            right.add(textfield);
-
-            loginbtn = new JButton("Login");                               //Button 
-            loginbtn.setBounds(60, 330, 260, 50);
-            loginbtn.setFont(new Font("Arial", Font.BOLD, 18));
-            loginbtn.setForeground(Color.WHITE);
-            loginbtn.setBackground(new Color(0, 102, 204));
-            loginbtn.setFocusable(false);
-            loginbtn.addActionListener(this);
-            right.add(loginbtn);
-            this.add(right);
-
-            this.setVisible(true);
+        this.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==loginbtn){
-            this.dispose();
-            new MainMenu();
-            JOptionPane.showMessageDialog(null, "Welcome "+ textfield.getText(), "", JOptionPane.INFORMATION_MESSAGE);
-        }   
+        if (e.getSource() == loginbtn) {
+            idnum = textfield.getText();
+            if (textfield.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please Enter ID ", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                this.dispose();
+                new MainMenu();
+                JOptionPane.showMessageDialog(null, "Welcome " + idnum, "", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == textfield) {
+            textfield.setText(null);
+        }
+    }
 
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
 
 }

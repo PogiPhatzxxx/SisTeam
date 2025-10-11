@@ -1,0 +1,10 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "e:\\PhaTz Project\\JavaSystemFiles\\json-20231013.jar"
+        ]
+    }
+}
